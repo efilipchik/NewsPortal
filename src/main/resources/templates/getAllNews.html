@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        body {
+            background: #f4aa90;
+            color: #000000;
+            font-family: Trebuchet MS, Arial, Times New Roman;
+            font-size: 20px;
+        }
+
+        div {
+            border: 1px solid #000000;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            padding: 10px;
+        }
+
+        input[type=submit]{
+            width:300px;
+            height:50px;
+            margin-left: 0%;
+            border: 1px solid #cccccc;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            font-size: 20px;
+        }
+        input[type=submit]:focus {
+            color: #000000;
+            border: 1px solid #e41c2a
+        }
+
+    </style>
+</head>
+<body>
+<a style="float: right" href="/logout">Log out</a>
+<form style="float: left" action="/getAllNewsByAuthor" method="GET">
+    <input type="submit" value="Search by author"></inputbutton>
+</form>
+<form style="float: left" action="/getAllNewsByTag" method="GET">
+    <input type="submit" value="Search by tag"></inputbutton>
+</form>
+<form action="/saveNews" method="GET">
+    <input type="submit" value="Save news"></inputbutton>
+</form>
+<div th:each="news:${Newss}">
+    <form action="/admin/deleteNews" method="post">
+    <input readonly name="id" th:value="${news.getId()}">
+    <p>Theme: <span th:text="${news.getTheme()}"></span></p>
+    <p>Content: <span th:text="${news.getContent()}"></span></p>
+    <p>Rating: <span th:text="${news.getRating()}"></span></p>
+    <p>Tag: <span th:text="${news.getTag().getTagName()}"></span></p>
+    <p>Author: <span th:text="${news.getAuthor().getFullName()}"></span></p>
+    <input type="submit" value="Delete"></inputbutton>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        body {
+            background: #f4aa90;
+            color: #000000;
+            font-family: Trebuchet MS, Arial, Times New Roman;
+            font-size: 20px;
+        }
+        input[type=text]{
+            width:300px;
+            height:50px;
+            margin-left: 0%;
+            border: 1px solid #cccccc;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            font-size: 20px;
+        }
+        input[type=text]:focus {
+            color: #000000;
+            border: 1px solid #e41c2a
+        }
+        input[type=submit]{
+            width:300px;
+            height:50px;
+            margin-left: 0%;
+            border: 1px solid #cccccc;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            font-size: 20px;
+        }
+        input[type=submit]:focus {
+            color: #000000;
+            border: 1px solid #e41c2a
+        }
+
+    </style>
+</head>
+<body>
+<form action="/saveNews" method="post">
+    <p>Enter theme: <input type="text" name="theme"/></p>
+    <p>Enter content: <input type="text" name="content"/></p>
+    <p>Enter rating: <input type="text" name="rating"/></p>
+    <p>Enter tag: <input type="text" name="tag"/></p>
+    <h2><input type="submit" value="Add news"></inputbutton></h2>
+</form>
+</body>
+</html>
