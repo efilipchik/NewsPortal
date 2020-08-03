@@ -3,6 +3,8 @@ package com.tms.myproject.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ManyToAny;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -30,5 +32,9 @@ public class News extends BaseModel{
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     private Tag tag;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Author> authorRated;
 
 }

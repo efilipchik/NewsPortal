@@ -1,11 +1,9 @@
 package com.tms.myproject.controller;
 
 import com.tms.myproject.model.Author;
-import com.tms.myproject.model.AuthorFromRating;
 import com.tms.myproject.model.News;
 import com.tms.myproject.model.Tag;
 import com.tms.myproject.service.Author.AuthorService;
-import com.tms.myproject.service.AuthorFromRating.AuthorFromRatingService;
 import com.tms.myproject.service.News.NewsService;
 import com.tms.myproject.service.Tag.TagService;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,14 +22,11 @@ public class NewsController {
     private final NewsService newsService;
     private final AuthorService authorService;
     private final TagService tagService;
-    private final AuthorFromRatingService authorFromRatingService;
 
-    public NewsController(NewsService newsService, AuthorService authorService, TagService tagService,
-                          AuthorFromRatingService authorFromRatingService) {
+    public NewsController(NewsService newsService, AuthorService authorService, TagService tagService) {
         this.newsService = newsService;
         this.authorService = authorService;
         this.tagService = tagService;
-        this.authorFromRatingService = authorFromRatingService;
     }
 
 
@@ -153,6 +148,13 @@ public class NewsController {
         author2.setFullName(author);
         if (!author1.equals(author2)) {
             News news = newsService.findNewsById(id);
+            boolean status = true;
+            for (Author authorRated: news.getAuthorRated()) {
+                if (authorRated.getFullName().equals(author1.getFullName())) {
+                status = false;
+                }
+            }
+            if (status) {
                 Double ratingNew1 = new Double(ratingNew);
                 if (rating != null) {
                     Double rating1 = (rating + ratingNew1) / 2;
@@ -160,10 +162,15 @@ public class NewsController {
                 } else {
                     news.setRating(ratingNew1);
                 }
+                List<Author> authorRatedList = news.getAuthorRated();
+
+                authorRatedList.add(authorService.findByAuthorFullName(author1.getFullName()));
+                news.setAuthorRated(authorRatedList);
                 newsService.saveNews(news);
+            }
+
                 return new RedirectView("getAllNews");
             } else return "notYourNews";
-
     }
 
 }

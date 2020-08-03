@@ -32,13 +32,6 @@ public class UserController {
         this.authorService = authorService;
     }
 
-    @GetMapping(value = "getAllUsers")
-    public String getAllUsers(Model model) {
-        List<User> allUs = userService.findAllUser();
-        model.addAttribute("Users", allUs);
-        return "getAllUsers";
-    }
-
     @GetMapping(value = "loginUser")
     public String getLoginUser() {
         return "loginUser";
@@ -79,5 +72,10 @@ public class UserController {
        userService.saveUser(user);
        return new RedirectView("getAllUsers");
    }
+
+  @GetMapping(value = "403")
+    public String get403() {
+        return "403";
+  }
 
 }
