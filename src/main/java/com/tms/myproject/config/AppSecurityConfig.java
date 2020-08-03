@@ -22,7 +22,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/**").authenticated()
 //                    .anyRequest().permitAll()
                     .and()
-                    .formLogin().loginPage("/loginUser").permitAll().defaultSuccessUrl("/getAllNews");
+                    .formLogin().loginPage("/loginUser").permitAll().defaultSuccessUrl("/getAllNews", true);
         http.csrf()
                 .disable()
                 .authorizeRequests();

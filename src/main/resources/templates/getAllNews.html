@@ -43,11 +43,14 @@
     <input type="submit" value="Search by tag"></inputbutton>
 </form>
 <form action="/saveNews" method="GET">
-    <input type="submit" value="Save news"></inputbutton>
+    <input type="submit" value="Add news"></inputbutton>
+</form>
+<form action="/getAllUsers" method="GET">
+    <input style="float: right" type="submit" value="Users"></inputbutton>
 </form>
 <div th:each="news:${Newss}">
     <form action="/admin/deleteNews" method="post">
-    <input readonly name="id" th:value="${news.getId()}">
+    <input hidden readonly name="id" th:value="${news.getId()}">
     <p>Theme: <span th:text="${news.getTheme()}"></span></p>
     <p>Content: <span th:text="${news.getContent()}"></span></p>
     <p>Rating: <span th:text="${news.getRating()}"></span></p>
@@ -55,6 +58,24 @@
     <p>Author: <span th:text="${news.getAuthor().getFullName()}"></span></p>
     <input type="submit" value="Delete"></inputbutton>
     </form>
+    <form action="/updateNews" method="post">
+        <input hidden readonly name="id" th:value="${news.getId()}">
+        <input hidden readonly name="theme" th:value="${news.getTheme()}">
+        <input hidden readonly name="content" th:value="${news.getContent()}">
+        <input hidden readonly name="rating" th:value="${news.getRating()}">
+        <input hidden readonly name="tag" th:value="${news.getTag().getTagName()}">
+        <input hidden readonly name="author" th:value="${news.getAuthor().getFullName()}">
+        <input type="submit" value="Update"></inputbutton>
+    </form>
+
+    <form action="/ratingNew" method="post">
+        <input hidden readonly name="id" th:value="${news.getId()}">
+        <input hidden readonly name="rating" th:value="${news.getRating()}">
+        <input hidden readonly name="author" th:value="${news.getAuthor().getFullName()}">
+        <p>Enter rating: <input type="text" name="ratingNew"/></p>
+        <input type="submit" value="Estimate"></inputbutton>
+    </form>
+
 </div>
 </body>
 </html>

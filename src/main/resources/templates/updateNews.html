@@ -40,12 +40,15 @@
     </style>
 </head>
 <body>
-<form action="/saveNews" method="post">
-    <p>Enter theme: <input type="text" name="theme"/></p>
-    <p>Enter content: <input type="text" name="content"/></p>
-<!--    <p>Enter rating: <input type="text" name="rating"/></p>-->
-    <p>Enter tag: <input type="text" name="tag"/></p>
-    <h2><input type="submit" value="Add news"></inputbutton></h2>
+<div th:each="news:${News}">
+<form action="/saveUpdateNews" method="post">
+    <input hidden readonly name="id" th:value="${News.getId()}">
+    <p>Enter theme: <input type="text" name="theme" th:value="${News.getTheme()}"/></p>
+    <p>Enter content: <input type="text" name="content" th:value="${News.getContent()}"/></p>
+    <p>Enter rating: <input type="text" name="rating" th:value="${News.getRating()}"/></p>
+    <p>Enter tag: <input type="text" name="tag" th:value="${News.getTag().getTagName()}"/></p>
+    <h2><input type="submit" value="Update"></inputbutton></h2>
 </form>
+</div>
 </body>
 </html>

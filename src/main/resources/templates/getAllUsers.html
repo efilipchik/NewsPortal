@@ -17,7 +17,19 @@
             -webkit-border-radius: 3px;
             padding: 10px;
         }
-
+        input[type=text]{
+            width:300px;
+            height:50px;
+            margin-left: 0%;
+            border: 1px solid #cccccc;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            font-size: 20px;
+        }
+        input[type=text]:focus {
+            color: #000000;
+            border: 1px solid #e41c2a
+        }
         input[type=submit]{
             width:300px;
             height:50px;
@@ -31,17 +43,32 @@
             color: #000000;
             border: 1px solid #e41c2a
         }
+        select {
+            width:300px;
+            height:50px;
+            border: 1px solid #cccccc;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            font-size: 20px;
+            margin: 20px 0px;
+        }
 
     </style>
 </head>
 <body>
+<form action="/getAllNews" method="GET">
+    <input type="submit" value="Get all news"></inputbutton>
+</form>
 <div th:each="user:${Users}">
-<!--    <form action="changeRole" method="post">-->
-<!--    <input readonly name="role" th:value="${user.getRoles()}">-->
-    <p>Login: <span th:text="${user.getLogin()}"></span></p>
-    <p>Name: <span th:text="${user.getName()}"></span></p>
-<!--    <input type="submit" value="Change role"></inputbutton>-->
-<!--    </form>-->
+    <form action="/changeRole" method="post">
+    <input type="text" readonly name="login" th:value="${user.getLogin()}"><br>
+    <input type="text" readonly name="name" th:value="${user.getName()}"><br>
+    <select name="roles" multiple>
+        <option>USER</option>
+        <option>ADMIN</option>
+    </select><br>
+        <input type="submit" value="Change role"></inputbutton>
+    </form>
 </div>
 </body>
 </html>

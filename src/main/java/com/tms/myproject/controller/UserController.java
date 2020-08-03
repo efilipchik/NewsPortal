@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -49,7 +50,9 @@ public class UserController {
     }
 
     @PostMapping(value = "saveUser")
-    public RedirectView postSaveUser(@RequestParam String login, @RequestParam String password, @RequestParam String name) {
+    public RedirectView postSaveUser(@RequestParam String login,
+                                     @RequestParam String password,
+                                     @RequestParam String name) {
         User user = new User();
         user.setLogin(login);
         user.setPassword(password);
@@ -63,11 +66,18 @@ public class UserController {
         return new RedirectView("getAllUsers");
     }
 
-//    @PostMapping(value = "changeRole")
-//    public RedirectView postChangeRole(@RequestParam  role) {
-//        User user = userService.findByLogin(login);
-//        user.getId();
-//        return new RedirectView("changeRole");
-//    }
+   @PostMapping(value = "changeRole")
+    public RedirectView postChangeRole(@RequestParam(required = false) String login,
+                                       @RequestParam(required = false) List<String> roles) {
+        User user = userService.findByLogin(login);
+        List<Role> listRoles = new ArrayList<>();
+       for (String role : roles) {
+           Role role1 = roleService.findRoleByName(role);
+           listRoles.add(role1);
+       }
+       user.setRoles(listRoles);
+       userService.saveUser(user);
+       return new RedirectView("getAllUsers");
+   }
 
 }
