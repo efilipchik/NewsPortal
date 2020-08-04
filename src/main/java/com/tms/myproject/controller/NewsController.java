@@ -6,6 +6,7 @@ import com.tms.myproject.model.Tag;
 import com.tms.myproject.service.Author.AuthorService;
 import com.tms.myproject.service.News.NewsService;
 import com.tms.myproject.service.Tag.TagService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,7 @@ public class NewsController {
     private final AuthorService authorService;
     private final TagService tagService;
 
+    @Autowired
     public NewsController(NewsService newsService, AuthorService authorService, TagService tagService) {
         this.newsService = newsService;
         this.authorService = authorService;
