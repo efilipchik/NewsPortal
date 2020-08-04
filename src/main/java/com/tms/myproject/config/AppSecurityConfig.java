@@ -18,6 +18,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 //      http.authorizeRequests().antMatchers("/main").hasAnyRole("USER");
             http.authorizeRequests()
                     .antMatchers("/saveUser").permitAll()
+                    .antMatchers("/h2-console/**").permitAll()
                     .antMatchers("/admin/**").hasRole("ADMIN")
                     .antMatchers("/**").authenticated()
 //                    .anyRequest().permitAll()
@@ -29,6 +30,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf()
                 .disable()
                 .authorizeRequests();
+        http.headers().frameOptions().disable();
     }
 
     @Override
