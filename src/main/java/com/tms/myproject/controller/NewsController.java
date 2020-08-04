@@ -126,12 +126,10 @@ public class NewsController {
     public RedirectView postSaveUpdateNews(@RequestParam(required = false) Long id,
                                            @RequestParam(required = false) String theme,
                                            @RequestParam(required = false) String content,
-                                           @RequestParam(required = false) Double rating,
                                            @RequestParam(required = false) String tag) {
         News news = newsService.findNewsById(id);
         news.setTheme(theme);
         news.setContent(content);
-        news.setRating(rating);
         Tag tag1 = new Tag();
         tag1.setTagName(tag);
         tagService.saveTag(tag1);
@@ -165,7 +163,6 @@ public class NewsController {
                     news.setRating(ratingNew1);
                 }
                 List<Author> authorRatedList = news.getAuthorRated();
-
                 authorRatedList.add(authorService.findByAuthorFullName(author1.getFullName()));
                 news.setAuthorRated(authorRatedList);
                 newsService.saveNews(news);

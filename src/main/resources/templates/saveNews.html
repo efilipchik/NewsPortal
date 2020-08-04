@@ -18,6 +18,7 @@
             border-radius: 3px;
             -webkit-border-radius: 3px;
             font-size: 20px;
+            clear: both;
         }
         input[type=text]:focus {
             color: #000000;
@@ -36,14 +37,22 @@
             color: #000000;
             border: 1px solid #e41c2a
         }
+        div {
+            -webkit-border-radius: 3px;
+            padding: 10px;
+            font-size: 50px;
+        }
 
     </style>
 </head>
 <body>
+<form action="/getAllNews" method="GET">
+    <input type="submit" value="Get all News"></inputbutton>
+</form>
 <form action="/saveNews" method="post">
+    <div>Add news</div>
     <p>Enter theme: <input type="text" name="theme"/></p>
     <p>Enter content: <input type="text" name="content"/></p>
-<!--    <p>Enter rating: <input type="text" name="rating"/></p>-->
     <p>Enter tag: <input type="text" name="tag"/></p>
     <h2><input type="submit" value="Add news"></inputbutton></h2>
 </form>
